@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: iceberg-minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: password123
+    command: server /data --console-address ":9001"
+
+  nessie:
+    image: ghcr.io/projectnessie/nessie:latest
+    container_name: iceberg-nessie
+    ports:
+      - "19120:19120"
+    environment:
+      QUARKUS_HTTP_PORT: 19120
+
+  spark-iceberg:
+    image: tabulario/spark-iceberg:latest
+    container_name: iceberg-spark
+    depends_on:
+      - minio
+      - nessie
+    ports:
+      - "8888:8888"
+      - "8080:8080"
+    environment:
+      AWS_ACCESS_KEY_ID: admin
+      AWS_SECRET_ACCESS_KEY: password123

@@ -1,0 +1,6 @@
+order_id,customer_id,order_timestamp,status,amount,currency
+1,1001,2026-01-01T10:15:00,created,49.99,EUR
+2,1002,2026-01-01T10:45:00,created,19.50,EUR
+3,1001,2026-01-02T09:10:00,cancelled,12.00,EUR
+4,1003,2026-01-02T11:30:00,created,99.00,EUR
+5,1004,2026-01-03T14:05:00,created,8.99,EUR
