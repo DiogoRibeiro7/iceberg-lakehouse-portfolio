@@ -37,7 +37,9 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 │   └── inspect_tables.sql
 ├── src/iceberg_portfolio/
 │   ├── __init__.py
+│   ├── csv_utils.py
 │   ├── config.py
+│   ├── schemas.py
 │   ├── spark_session.py
 │   └── jobs/
 │       ├── bronze_orders.py
@@ -72,6 +74,13 @@ python -m iceberg_portfolio.jobs.silver_orders
 python -m iceberg_portfolio.jobs.gold_orders
 ```
 
+Pipeline outputs are written as deterministic CSV tables:
+- `data/bronze/orders_raw.csv`
+- `data/silver/orders_clean.csv`
+- `data/gold/daily_revenue.csv`
+
+Each run overwrites target files, so reruns are idempotent for the same input.
+
 ## Development workflow
 
 Run local quality checks with:
@@ -89,7 +98,8 @@ pre-commit run --all-files
 
 ## Current status
 
-This scaffold is intentionally small. It is a portfolio base, not yet a full production lakehouse.
+The project now includes reproducible bronze/silver/gold jobs with schema validation and CI checks.
+It is still intentionally small and remains a portfolio base, not a full production lakehouse.
 
 ## Next recommended steps
 

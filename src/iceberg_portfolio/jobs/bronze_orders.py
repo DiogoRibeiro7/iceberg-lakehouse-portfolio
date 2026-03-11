@@ -1,19 +1,30 @@
 from __future__ import annotations
 
-import csv
 from pathlib import Path
+
+from iceberg_portfolio.config import LakehouseConfig
+from iceberg_portfolio.csv_utils import read_csv_rows, validate_columns, write_csv_rows
+from iceberg_portfolio.schemas import RAW_ORDERS_COLUMNS
+
+
+def run(config: LakehouseConfig) -> int:
+    """Load raw rows and persist the bronze table as an idempotent overwrite."""
+    raw_path = Path(config.raw_orders_path)
+    bronze_path = Path(config.bronze_orders_path)
+
+    columns, rows = read_csv_rows(raw_path)
+    validate_columns(columns, RAW_ORDERS_COLUMNS, label="raw orders")
+    write_csv_rows(bronze_path, RAW_ORDERS_COLUMNS, rows)
+    return len(rows)
 
 
 def main() -> None:
-    """Load raw order rows from the sample CSV.
-
-    This placeholder job keeps the bronze layer concept explicit: ingest raw data
-    with minimal interpretation.
-    """
-    path = Path("data/raw/orders.csv")
-    with path.open("r", encoding="utf-8") as handle:
-        rows = list(csv.DictReader(handle))
-    print(f"Bronze ingest complete. Loaded {len(rows)} rows from {path}.")
+    cfg = LakehouseConfig()
+    row_count = run(cfg)
+    print(
+        f"Bronze ingest complete. table={cfg.bronze_orders_table} rows={row_count} "
+        f"path={cfg.bronze_orders_path}"
+    )
 
 
 if __name__ == "__main__":

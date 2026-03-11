@@ -22,3 +22,24 @@ class LakehouseConfig:
     s3_secret_key: str = field(
         default_factory=lambda: os.getenv("AWS_SECRET_ACCESS_KEY", "password123")
     )
+    raw_orders_path: str = field(
+        default_factory=lambda: os.getenv("RAW_ORDERS_PATH", "data/raw/orders.csv")
+    )
+    bronze_orders_path: str = field(
+        default_factory=lambda: os.getenv("BRONZE_ORDERS_PATH", "data/bronze/orders_raw.csv")
+    )
+    silver_orders_path: str = field(
+        default_factory=lambda: os.getenv("SILVER_ORDERS_PATH", "data/silver/orders_clean.csv")
+    )
+    gold_daily_revenue_path: str = field(
+        default_factory=lambda: os.getenv("GOLD_DAILY_REVENUE_PATH", "data/gold/daily_revenue.csv")
+    )
+    bronze_orders_table: str = field(
+        default_factory=lambda: os.getenv("BRONZE_ORDERS_TABLE", "bronze.orders_raw")
+    )
+    silver_orders_table: str = field(
+        default_factory=lambda: os.getenv("SILVER_ORDERS_TABLE", "silver.orders_clean")
+    )
+    gold_daily_revenue_table: str = field(
+        default_factory=lambda: os.getenv("GOLD_DAILY_REVENUE_TABLE", "gold.daily_revenue")
+    )
