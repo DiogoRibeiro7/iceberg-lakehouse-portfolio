@@ -36,12 +36,14 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 │   ├── aws_mapping.md
 │   ├── data_dictionary.md
 │   ├── demo_walkthrough.md
+│   ├── maintenance_demo.md
 │   ├── nessie_branching_demo.md
 │   ├── phase2_demos.md
 │   └── roadmap.md
 ├── sql/
 │   ├── gold_metrics.sql
 │   ├── inspect_tables.sql
+│   ├── maintenance_demo.sql
 │   ├── merge_upsert_delete_demo.sql
 │   ├── nessie_branching_demo.sql
 │   ├── schema_evolution_demo.sql
@@ -157,6 +159,11 @@ Demo details and run order are documented in `docs/phase2_demos.md`.
 - SQL walkthrough: `sql/nessie_branching_demo.sql`
 - Runbook and validation checklist: `docs/nessie_branching_demo.md`
 
+## Maintenance workflows (Phase 3)
+
+- SQL walkthrough: `sql/maintenance_demo.sql`
+- Runbook and verification checklist: `docs/maintenance_demo.md`
+
 ## Portfolio demo path
 
 - Architecture and design rationale: `docs/architecture.md`
@@ -171,4 +178,4 @@ It is still intentionally small and remains a portfolio base, not a full product
 
 ## Next recommended steps
 
-1. Add maintenance workflows (compaction/snapshot expiration examples).
+1. Extend portfolio polish with recorded demo artifacts (screenshots/video snippets).

@@ -36,3 +36,16 @@ def test_nessie_branching_demo_contains_branch_workflow() -> None:
     assert "use reference dev in local" in sql
     assert "merge branch dev into main in local" in sql
     assert "drop branch if exists dev in local" in sql
+
+
+def test_maintenance_demo_contains_maintenance_operations() -> None:
+    sql = _read_sql("sql/maintenance_demo.sql")
+    assert "expire_snapshots" in sql
+    assert "rewrite_data_files" in sql
+    assert "rewrite_manifests" in sql
+    assert "remove_orphan_files" in sql
+    assert "retain_last" in sql
+    assert "binpack" in sql
+    assert ".snapshots" in sql
+    assert ".files" in sql
+    assert ".manifests" in sql

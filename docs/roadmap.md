@@ -12,9 +12,10 @@
 - Add schema evolution demo
 - Add merge/upsert/delete demo
 
-### Phase 3 (partial)
+### Phase 3
 - Add data quality checks
 - Add Nessie branching demo
+- Add maintenance workflows (snapshot expiration, compaction, manifest rewriting, orphan removal)
 
 ### Phase 4 (partial)
 - Add CI and test coverage
@@ -23,9 +24,6 @@
 - Add AWS mapping for S3, Glue, Athena, and EMR/Glue ETL
 
 ## Next
-
-### Phase 3
-- Add maintenance workflows
 
 ### Phase 5
 - Extend portfolio polish with recorded demo artifacts (screenshots/video snippets)
