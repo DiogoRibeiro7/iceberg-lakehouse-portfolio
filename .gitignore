@@ -13,6 +13,9 @@ venv/
 .mypy_cache/
 .ruff_cache/
 *.egg-info/
+data/bronze/
+data/silver/
+data/gold/
 
 # OS/Editor
 .DS_Store

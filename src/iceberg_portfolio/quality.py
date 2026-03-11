@@ -86,9 +86,7 @@ def _validate_gold_rows(rows: list[dict[str, str]]) -> Decimal:
     for idx, row in enumerate(rows, start=1):
         for key in GOLD_DAILY_REVENUE_COLUMNS:
             if row.get(key, "").strip() == "":
-                raise DataQualityError(
-                    f"Gold quality check failed: '{key}' is empty at row {idx}."
-                )
+                raise DataQualityError(f"Gold quality check failed: '{key}' is empty at row {idx}.")
 
         order_date = row["order_date"]
         datetime.strptime(order_date, "%Y-%m-%d")
@@ -116,9 +114,7 @@ def run_quality_checks(config: LakehouseConfig) -> QualitySummary:
     validate_columns(silver_columns, SILVER_ORDERS_COLUMNS, label="silver orders")
 
     gold_columns, gold_rows = read_csv_rows(gold_path)
-    validate_columns(
-        gold_columns, GOLD_DAILY_REVENUE_COLUMNS, label="gold daily revenue"
-    )
+    validate_columns(gold_columns, GOLD_DAILY_REVENUE_COLUMNS, label="gold daily revenue")
 
     silver_total = _validate_silver_rows(silver_rows)
     gold_total = _validate_gold_rows(gold_rows)

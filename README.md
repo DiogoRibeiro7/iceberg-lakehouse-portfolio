@@ -27,6 +27,8 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 .
 ├── data/
 │   └── raw/orders.csv
+├── config/
+│   └── profiles/local.env
 ├── docker/
 │   └── docker-compose.yml
 ├── docs/
@@ -42,19 +44,29 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 │   ├── nessie_branching_demo.sql
 │   ├── schema_evolution_demo.sql
 │   └── time_travel_demo.sql
+├── scripts/
+│   └── smoke_test.py
 ├── src/iceberg_portfolio/
 │   ├── __init__.py
+│   ├── cli.py
 │   ├── csv_utils.py
 │   ├── config.py
+│   ├── logging_utils.py
+│   ├── quality.py
 │   ├── schemas.py
 │   ├── spark_session.py
 │   └── jobs/
 │       ├── bronze_orders.py
+│       ├── quality_checks.py
+│       ├── run_pipeline.py
 │       ├── silver_orders.py
 │       └── gold_orders.py
 └── tests/
     ├── test_config.py
-    └── test_jobs.py
+    ├── test_demo_sql.py
+    ├── test_jobs.py
+    ├── test_quality.py
+    └── test_runtime_cli.py
 ```
 
 ## Quick start
@@ -80,6 +92,7 @@ python -m iceberg_portfolio.jobs.bronze_orders
 python -m iceberg_portfolio.jobs.silver_orders
 python -m iceberg_portfolio.jobs.gold_orders
 python -m iceberg_portfolio.jobs.quality_checks
+python -m iceberg_portfolio.jobs.run_pipeline
 ```
 
 Pipeline outputs are written as deterministic CSV tables:
@@ -89,6 +102,9 @@ Pipeline outputs are written as deterministic CSV tables:
 
 Each run overwrites target files, so reruns are idempotent for the same input.
 Quality checks fail fast on broken schemas, invalid values, or reconciliation mismatches.
+Jobs support runtime flags:
+- `--config-profile <path>` to load KEY=VALUE settings files
+- `--log-level DEBUG|INFO|WARNING|ERROR`
 
 ## Development workflow
 
@@ -103,6 +119,21 @@ Run the full deterministic local pipeline (including data quality):
 ```bash
 make run-pipeline
 ```
+
+Run the full pipeline with profile file explicitly:
+
+```bash
+make run-pipeline-profile
+```
+
+Run local smoke validation (Docker services + pipeline run):
+
+```bash
+make smoke
+```
+
+Optional integration CI workflow:
+- `.github/workflows/integration-smoke.yml` (manual trigger, plus relevant PR path changes)
 
 Install and run pre-commit hooks:
 
@@ -126,7 +157,8 @@ Demo details and run order are documented in `docs/phase2_demos.md`.
 
 ## Current status
 
-The project now includes reproducible bronze/silver/gold jobs with schema validation and CI checks.
+The project now includes reproducible bronze/silver/gold jobs with schema validation,
+profile-driven config, structured logging/CLI flags, and CI checks.
 It is still intentionally small and remains a portfolio base, not a full production lakehouse.
 
 ## Next recommended steps

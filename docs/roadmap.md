@@ -16,6 +16,11 @@
 - Add data quality checks
 - Add Nessie branching demo
 
+### Phase 4 (partial)
+- Add CI and test coverage
+- Add logging, CLI flags, and profile-based config
+- Add smoke test workflow for local stack validation
+
 ## Next
 
 ### Phase 3
@@ -23,4 +28,3 @@
 
 ## Phase 4
 - Add AWS mapping for S3, Glue, Athena, and EMR/Glue ETL
-- Add CI and test coverage

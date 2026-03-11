@@ -1,13 +1,17 @@
 from __future__ import annotations
 
+import logging
 from collections import defaultdict
 from datetime import datetime
 from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
 
+from iceberg_portfolio.cli import build_common_parser, config_from_args, parse_args
 from iceberg_portfolio.config import LakehouseConfig
 from iceberg_portfolio.csv_utils import read_csv_rows, validate_columns, write_csv_rows
 from iceberg_portfolio.schemas import GOLD_DAILY_REVENUE_COLUMNS, SILVER_ORDERS_COLUMNS
+
+LOGGER = logging.getLogger(__name__)
 
 
 def run(config: LakehouseConfig) -> list[dict[str, str]]:
@@ -30,11 +34,19 @@ def run(config: LakehouseConfig) -> list[dict[str, str]]:
         aggregated.append({"order_date": order_day, "revenue": f"{revenue:.2f}"})
 
     write_csv_rows(gold_path, GOLD_DAILY_REVENUE_COLUMNS, aggregated)
+    LOGGER.info(
+        "Gold table written: table=%s path=%s rows=%d",
+        config.gold_daily_revenue_table,
+        gold_path,
+        len(aggregated),
+    )
     return aggregated
 
 
-def main() -> None:
-    cfg = LakehouseConfig()
+def main(argv: list[str] | None = None) -> None:
+    parser = build_common_parser("Run gold aggregation job.")
+    args = parse_args(parser, argv)
+    cfg = config_from_args(args)
     daily_revenue = run(cfg)
     row_count = len(daily_revenue)
     print(

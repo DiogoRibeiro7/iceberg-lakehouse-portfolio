@@ -1,6 +1,8 @@
+from pathlib import Path
+
 from pytest import MonkeyPatch
 
-from iceberg_portfolio.config import LakehouseConfig
+from iceberg_portfolio.config import LakehouseConfig, build_config
 
 
 def test_default_catalog_name() -> None:
@@ -41,3 +43,32 @@ def test_env_change_reflected_in_new_instances(monkeypatch: MonkeyPatch) -> None
 
     assert first.catalog_name == "first"
     assert second.catalog_name == "second"
+
+
+def test_build_config_loads_profile_file(tmp_path: Path) -> None:
+    profile = tmp_path / "demo.env"
+    profile.write_text(
+        "\n".join(
+            [
+                "CATALOG_NAME=from_profile",
+                "RAW_ORDERS_PATH=data/demo.csv",
+                "GOLD_DAILY_REVENUE_TABLE=gold.demo",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    cfg = build_config(str(profile))
+    assert cfg.catalog_name == "from_profile"
+    assert cfg.raw_orders_path == "data/demo.csv"
+    assert cfg.gold_daily_revenue_table == "gold.demo"
+
+
+def test_environment_overrides_profile(monkeypatch: MonkeyPatch, tmp_path: Path) -> None:
+    profile = tmp_path / "demo.env"
+    profile.write_text("CATALOG_NAME=from_profile\n", encoding="utf-8")
+    monkeypatch.setenv("CATALOG_NAME", "from_env")
+
+    cfg = build_config(str(profile))
+    assert cfg.catalog_name == "from_env"
