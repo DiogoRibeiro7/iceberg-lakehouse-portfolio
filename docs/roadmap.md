@@ -20,11 +20,12 @@
 - Add CI and test coverage
 - Add logging, CLI flags, and profile-based config
 - Add smoke test workflow for local stack validation
+- Add AWS mapping for S3, Glue, Athena, and EMR/Glue ETL
 
 ## Next
 
 ### Phase 3
 - Add maintenance workflows
 
-## Phase 4
-- Add AWS mapping for S3, Glue, Athena, and EMR/Glue ETL
+### Phase 5
+- Extend portfolio polish with recorded demo artifacts (screenshots/video snippets)

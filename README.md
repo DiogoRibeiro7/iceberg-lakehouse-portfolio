@@ -33,7 +33,9 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 │   └── docker-compose.yml
 ├── docs/
 │   ├── architecture.md
+│   ├── aws_mapping.md
 │   ├── data_dictionary.md
+│   ├── demo_walkthrough.md
 │   ├── nessie_branching_demo.md
 │   ├── phase2_demos.md
 │   └── roadmap.md
@@ -155,6 +157,12 @@ Demo details and run order are documented in `docs/phase2_demos.md`.
 - SQL walkthrough: `sql/nessie_branching_demo.sql`
 - Runbook and validation checklist: `docs/nessie_branching_demo.md`
 
+## Portfolio demo path
+
+- Architecture and design rationale: `docs/architecture.md`
+- Interview-friendly runbook: `docs/demo_walkthrough.md`
+- AWS service mapping: `docs/aws_mapping.md`
+
 ## Current status
 
 The project now includes reproducible bronze/silver/gold jobs with schema validation,
@@ -164,4 +172,3 @@ It is still intentionally small and remains a portfolio base, not a full product
 ## Next recommended steps
 
 1. Add maintenance workflows (compaction/snapshot expiration examples).
-2. Add an AWS mapping document for S3 + Glue + Athena.
