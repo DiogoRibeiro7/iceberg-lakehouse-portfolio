@@ -1,6 +1,6 @@
 PYTHON ?= python
 
-.PHONY: install-dev format lint typecheck test check run-bronze run-silver run-gold
+.PHONY: install-dev format lint typecheck test check run-bronze run-silver run-gold run-quality run-pipeline
 
 install-dev:
 	$(PYTHON) -m pip install -e .[dev]
@@ -27,3 +27,9 @@ run-silver:
 
 run-gold:
 	$(PYTHON) -m iceberg_portfolio.jobs.gold_orders
+
+run-quality:
+	$(PYTHON) -m iceberg_portfolio.jobs.quality_checks
+
+run-pipeline:
+	$(PYTHON) -m iceberg_portfolio.jobs.run_pipeline

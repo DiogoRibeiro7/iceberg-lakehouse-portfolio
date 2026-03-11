@@ -31,10 +31,15 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 │   └── docker-compose.yml
 ├── docs/
 │   ├── architecture.md
+│   ├── data_dictionary.md
+│   ├── phase2_demos.md
 │   └── roadmap.md
 ├── sql/
 │   ├── gold_metrics.sql
-│   └── inspect_tables.sql
+│   ├── inspect_tables.sql
+│   ├── merge_upsert_delete_demo.sql
+│   ├── schema_evolution_demo.sql
+│   └── time_travel_demo.sql
 ├── src/iceberg_portfolio/
 │   ├── __init__.py
 │   ├── csv_utils.py
@@ -72,6 +77,7 @@ docker compose -f docker/docker-compose.yml up -d
 python -m iceberg_portfolio.jobs.bronze_orders
 python -m iceberg_portfolio.jobs.silver_orders
 python -m iceberg_portfolio.jobs.gold_orders
+python -m iceberg_portfolio.jobs.quality_checks
 ```
 
 Pipeline outputs are written as deterministic CSV tables:
@@ -80,6 +86,7 @@ Pipeline outputs are written as deterministic CSV tables:
 - `data/gold/daily_revenue.csv`
 
 Each run overwrites target files, so reruns are idempotent for the same input.
+Quality checks fail fast on broken schemas, invalid values, or reconciliation mismatches.
 
 ## Development workflow
 
@@ -89,12 +96,26 @@ Run local quality checks with:
 make check
 ```
 
+Run the full deterministic local pipeline (including data quality):
+
+```bash
+make run-pipeline
+```
+
 Install and run pre-commit hooks:
 
 ```bash
 pre-commit install
 pre-commit run --all-files
 ```
+
+## Iceberg demos (Phase 2)
+
+- Time travel: `sql/time_travel_demo.sql`
+- Schema evolution: `sql/schema_evolution_demo.sql`
+- Merge/upsert/delete: `sql/merge_upsert_delete_demo.sql`
+
+Demo details and run order are documented in `docs/phase2_demos.md`.
 
 ## Current status
 
@@ -103,8 +124,6 @@ It is still intentionally small and remains a portfolio base, not a full product
 
 ## Next recommended steps
 
-1. Add a deterministic time travel demo.
-2. Add schema evolution examples.
-3. Add `MERGE INTO` workflows.
-4. Add Nessie branch-based isolated development.
-5. Add an AWS mapping document for S3 + Glue + Athena.
+1. Add maintenance workflows (compaction/snapshot expiration examples).
+2. Add Nessie branch-based isolated development demos.
+3. Add an AWS mapping document for S3 + Glue + Athena.
