@@ -44,7 +44,8 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 │       ├── silver_orders.py
 │       └── gold_orders.py
 └── tests/
-    └── test_config.py
+    ├── test_config.py
+    └── test_jobs.py
 ```
 
 ## Quick start
@@ -54,7 +55,7 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install -e .
+pip install -e .[dev]
 ```
 
 ### 2. Start the local stack
@@ -69,6 +70,21 @@ docker compose -f docker/docker-compose.yml up -d
 python -m iceberg_portfolio.jobs.bronze_orders
 python -m iceberg_portfolio.jobs.silver_orders
 python -m iceberg_portfolio.jobs.gold_orders
+```
+
+## Development workflow
+
+Run local quality checks with:
+
+```bash
+make check
+```
+
+Install and run pre-commit hooks:
+
+```bash
+pre-commit install
+pre-commit run --all-files
 ```
 
 ## Current status

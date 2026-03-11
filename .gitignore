@@ -12,6 +12,7 @@ venv/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+*.egg-info/
 
 # OS/Editor
 .DS_Store
