@@ -14,12 +14,12 @@
 
 ### Phase 3 (partial)
 - Add data quality checks
+- Add Nessie branching demo
 
 ## Next
 
 ### Phase 3
 - Add maintenance workflows
-- Add Nessie branching demo
 
 ## Phase 4
 - Add AWS mapping for S3, Glue, Athena, and EMR/Glue ETL

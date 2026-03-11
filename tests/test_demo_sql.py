@@ -27,3 +27,12 @@ def test_merge_demo_contains_delete_update_insert_branches() -> None:
     assert "then delete" in sql
     assert "then\n  update set" in sql
     assert "then\n  insert" in sql
+
+
+def test_nessie_branching_demo_contains_branch_workflow() -> None:
+    sql = _read_sql("sql/nessie_branching_demo.sql")
+    assert "show references in local" in sql
+    assert "create branch if not exists dev in local from main" in sql
+    assert "use reference dev in local" in sql
+    assert "merge branch dev into main in local" in sql
+    assert "drop branch if exists dev in local" in sql

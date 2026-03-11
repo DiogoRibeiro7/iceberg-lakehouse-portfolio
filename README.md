@@ -32,12 +32,14 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 ├── docs/
 │   ├── architecture.md
 │   ├── data_dictionary.md
+│   ├── nessie_branching_demo.md
 │   ├── phase2_demos.md
 │   └── roadmap.md
 ├── sql/
 │   ├── gold_metrics.sql
 │   ├── inspect_tables.sql
 │   ├── merge_upsert_delete_demo.sql
+│   ├── nessie_branching_demo.sql
 │   ├── schema_evolution_demo.sql
 │   └── time_travel_demo.sql
 ├── src/iceberg_portfolio/
@@ -117,6 +119,11 @@ pre-commit run --all-files
 
 Demo details and run order are documented in `docs/phase2_demos.md`.
 
+## Nessie branching demo (Phase 3)
+
+- SQL walkthrough: `sql/nessie_branching_demo.sql`
+- Runbook and validation checklist: `docs/nessie_branching_demo.md`
+
 ## Current status
 
 The project now includes reproducible bronze/silver/gold jobs with schema validation and CI checks.
@@ -125,5 +132,4 @@ It is still intentionally small and remains a portfolio base, not a full product
 ## Next recommended steps
 
 1. Add maintenance workflows (compaction/snapshot expiration examples).
-2. Add Nessie branch-based isolated development demos.
-3. Add an AWS mapping document for S3 + Glue + Athena.
+2. Add an AWS mapping document for S3 + Glue + Athena.
