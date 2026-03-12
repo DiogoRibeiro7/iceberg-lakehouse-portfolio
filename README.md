@@ -52,6 +52,7 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 │   ├── data_dictionary.md
 │   ├── demo_walkthrough.md
 │   ├── flink_demo.md
+│   ├── flink_kafka_demo.md
 │   ├── maintenance_demo.md
 │   ├── nessie_branching_demo.md
 │   ├── phase2_demos.md
@@ -63,6 +64,7 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 │       └── data_preview.txt
 ├── sql/
 │   ├── flink_iceberg_streaming_demo.sql
+│   ├── flink_kafka_iceberg_demo.sql
 │   ├── gold_metrics.sql
 │   ├── inspect_tables.sql
 │   ├── maintenance_demo.sql
@@ -237,8 +239,8 @@ Demo details and run order are documented in `docs/phase2_demos.md`.
 
 ## Flink streaming demo
 
-- SQL walkthrough: `sql/flink_iceberg_streaming_demo.sql`
-- Runbook and talking points: `docs/flink_demo.md`
+- Datagen source: `sql/flink_iceberg_streaming_demo.sql` and `docs/flink_demo.md`
+- Kafka source: `sql/flink_kafka_iceberg_demo.sql` and `docs/flink_kafka_demo.md`
 
 ## Portfolio demo path
 

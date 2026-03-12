@@ -35,6 +35,41 @@ The script includes:
 4. Verify output table:
    - `SELECT * FROM gold.orders_revenue_1m LIMIT 20;`
 
+## Checkpoint and state configuration
+
+Default SQL client config (`docker/flink/sql-client/conf/sql-client-defaults.yaml`):
+- `execution.checkpointing.interval: 30 s`
+- `execution.checkpointing.mode: EXACTLY_ONCE`
+- `parallelism.default: 1`
+
+Optional runtime overrides in SQL client:
+
+```sql
+SET 'execution.checkpointing.interval' = '10 s';
+SET 'execution.checkpointing.mode' = 'EXACTLY_ONCE';
+SET 'restart-strategy.type' = 'fixed-delay';
+SET 'restart-strategy.fixed-delay.attempts' = '3';
+SET 'restart-strategy.fixed-delay.delay' = '10 s';
+```
+
+## Failure-recovery proof steps
+
+1. Start the continuous `INSERT INTO` job from `sql/flink_iceberg_streaming_demo.sql`.
+2. Confirm a running job:
+   - `curl http://localhost:8081/jobs/overview`
+3. Simulate a worker failure:
+   - `docker compose -f docker/docker-compose.yml stop flink-taskmanager`
+4. Wait 20-30 seconds, then recover worker:
+   - `docker compose -f docker/docker-compose.yml start flink-taskmanager`
+5. Re-check running jobs:
+   - `curl http://localhost:8081/jobs/overview`
+6. Validate sink table still receives results:
+   - `SELECT * FROM gold.orders_revenue_1m LIMIT 20;`
+
+Expected outcome:
+- Job transitions through restart and returns to `RUNNING`.
+- New rows continue to appear in the Iceberg sink table after recovery.
+
 ## Runtime jars bundled in SQL client image
 
 The SQL client image preloads:
@@ -44,6 +79,15 @@ The SQL client image preloads:
 
 S3 plugin is enabled via:
 - `ENABLE_BUILT_IN_PLUGINS=flink-s3-fs-hadoop-1.19.2.jar`
+
+Also included for real event sources:
+- `flink-sql-connector-kafka-3.2.0-1.19.jar`
+
+## Kafka-based variant
+
+For a real source (Kafka instead of `datagen`), use:
+- SQL: `sql/flink_kafka_iceberg_demo.sql`
+- Runbook: `docs/flink_kafka_demo.md`
 
 ## What to explain in interviews
 

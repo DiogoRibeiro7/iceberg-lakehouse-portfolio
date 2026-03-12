@@ -59,3 +59,13 @@ def test_flink_demo_contains_streaming_iceberg_pattern() -> None:
     assert "partitioned by (days(window_start))" in sql
     assert "insert into gold.orders_revenue_1m" in sql
     assert "tumble(table bronze.orders_events" in sql
+
+
+def test_flink_kafka_demo_contains_kafka_source_pattern() -> None:
+    sql = _read_sql("sql/flink_kafka_iceberg_demo.sql")
+    assert "'connector' = 'kafka'" in sql
+    assert "'topic' = 'orders-events'" in sql
+    assert "'properties.bootstrap.servers' = 'kafka:9092'" in sql
+    assert "'format' = 'json'" in sql
+    assert "insert into gold.orders_revenue_1m_kafka" in sql
+    assert "tumble(table bronze.orders_kafka" in sql
