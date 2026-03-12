@@ -6,11 +6,11 @@
 [![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C)](https://github.com/DiogoRibeiro7/iceberg-lakehouse-portfolio/security/dependabot)
 [![Zenodo](https://img.shields.io/badge/Zenodo-ready-blue)](https://zenodo.org/)
 
-Portfolio repository showcasing practical Apache Iceberg lakehouse engineering skills with Spark, MinIO, and Nessie.
+Portfolio repository showcasing practical Apache Iceberg lakehouse engineering skills with Spark, Flink, MinIO, and Nessie.
 
 ## What this repo demonstrates
 
-- Local lakehouse stack with **Spark + Iceberg + MinIO + Nessie**
+- Local lakehouse stack with **Spark/Flink + Iceberg + MinIO + Nessie**
 - Simple **bronze / silver / gold** medallion pipeline
 - Sample analyst-friendly SQL queries
 - Iceberg demo assets for:
@@ -19,12 +19,14 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
   - merge/upsert/delete
   - Nessie branching
   - maintenance operations
+  - Flink streaming to Iceberg
 
 ## Architecture
 
 - **MinIO**: local S3-compatible object storage
 - **Nessie**: catalog and branching layer
 - **Spark**: processing engine
+- **Flink**: streaming processing engine
 - **Iceberg**: table format
 
 ## Prerequisites
@@ -49,6 +51,8 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 │   ├── aws_mapping.md
 │   ├── data_dictionary.md
 │   ├── demo_walkthrough.md
+│   ├── flink_demo.md
+│   ├── flink_kafka_demo.md
 │   ├── maintenance_demo.md
 │   ├── nessie_branching_demo.md
 │   ├── phase2_demos.md
@@ -59,6 +63,8 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 │       ├── test_suite.txt
 │       └── data_preview.txt
 ├── sql/
+│   ├── flink_iceberg_streaming_demo.sql
+│   ├── flink_kafka_iceberg_demo.sql
 │   ├── gold_metrics.sql
 │   ├── inspect_tables.sql
 │   ├── maintenance_demo.sql
@@ -126,6 +132,12 @@ pip install -e .[dev]
 docker compose -f docker/docker-compose.yml up -d
 ```
 
+Optional: open the preconfigured Flink SQL client (Iceberg/Nessie jars included):
+
+```bash
+docker compose -f docker/docker-compose.yml run --rm flink-sql-client
+```
+
 ### 3. Run the medallion pipeline
 
 ```bash
@@ -161,7 +173,7 @@ python -m iceberg_portfolio.jobs.run_pipeline --config-profile config/profiles/l
 ## What runs where
 
 - Python jobs in `src/iceberg_portfolio/jobs` generate deterministic local CSV outputs for reproducible portfolio execution.
-- Spark/Iceberg/Nessie/MinIO services are used for SQL demos and lakehouse architecture walkthroughs under `sql/` and `docs/`.
+- Spark/Flink/Iceberg/Nessie/MinIO services are used for SQL demos and lakehouse architecture walkthroughs under `sql/` and `docs/`.
 - This split keeps the core pipeline fast and deterministic while still demonstrating Iceberg platform concepts.
 
 ## Development workflow
@@ -224,6 +236,11 @@ Demo details and run order are documented in `docs/phase2_demos.md`.
 
 - SQL walkthrough: `sql/maintenance_demo.sql`
 - Runbook and verification checklist: `docs/maintenance_demo.md`
+
+## Flink streaming demo
+
+- Datagen source: `sql/flink_iceberg_streaming_demo.sql` and `docs/flink_demo.md`
+- Kafka source: `sql/flink_kafka_iceberg_demo.sql` and `docs/flink_kafka_demo.md`
 
 ## Portfolio demo path
 
