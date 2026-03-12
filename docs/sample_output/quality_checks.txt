@@ -1,0 +1,4 @@
+$ python -m iceberg_portfolio.jobs.quality_checks
+
+2026-03-12 09:14:11,894 INFO [__main__] Quality checks passed: silver_rows=5 gold_rows=3 silver_total=189.48 gold_total=189.48
+Quality checks passed. silver_rows=5 gold_rows=3 silver_total=189.48 gold_total=189.48

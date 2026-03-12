@@ -12,9 +12,15 @@ venv/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+*.egg-info/
+data/bronze/
+data/silver/
+data/gold/
 
 # OS/Editor
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+
+settings.local.json

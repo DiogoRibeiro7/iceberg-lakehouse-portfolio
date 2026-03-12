@@ -1,0 +1,35 @@
+name: Integration Smoke
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "docker/**"
+      - "scripts/smoke_test.py"
+      - "src/**"
+      - "config/profiles/**"
+      - ".github/workflows/integration-smoke.yml"
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - run: pip install -e .[dev]
+
+      - name: Start local stack
+        run: docker compose -f docker/docker-compose.yml up -d --wait --wait-timeout 60
+
+      - name: Run smoke test
+        run: python scripts/smoke_test.py --config-profile config/profiles/local.env
+
+      - name: Tear down stack
+        if: always()
+        run: docker compose -f docker/docker-compose.yml down -v
