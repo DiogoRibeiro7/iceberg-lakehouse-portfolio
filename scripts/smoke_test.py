@@ -77,9 +77,7 @@ def _assert_pipeline_outputs() -> None:
         header = path.read_text(encoding="utf-8").splitlines()[0]
         for col in required_columns:
             if col not in header:
-                raise RuntimeError(
-                    f"Smoke test failed: {path} missing expected column '{col}'"
-                )
+                raise RuntimeError(f"Smoke test failed: {path} missing expected column '{col}'")
 
 
 if __name__ == "__main__":
