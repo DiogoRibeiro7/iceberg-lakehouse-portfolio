@@ -34,6 +34,8 @@ The script includes:
 3. Execute the SQL script sections from `sql/flink_iceberg_streaming_demo.sql` in order.
 4. Verify output table:
    - `SELECT * FROM gold.orders_revenue_1m LIMIT 20;`
+   - quick validator:
+     - `python scripts/validate_flink_sink_rows.py --table gold.orders_revenue_1m`
 
 ## Checkpoint and state configuration
 

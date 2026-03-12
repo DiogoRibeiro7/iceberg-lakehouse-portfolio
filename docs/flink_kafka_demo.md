@@ -36,6 +36,8 @@ windowed aggregates into Iceberg tables in Nessie.
    - `sql/flink_kafka_iceberg_demo.sql`
 6. Verify output:
    - `SELECT * FROM gold.orders_revenue_1m_kafka LIMIT 20;`
+   - quick validator:
+     - `python scripts/validate_flink_sink_rows.py --table gold.orders_revenue_1m_kafka`
 
 ## Checkpoint and state configuration
 
