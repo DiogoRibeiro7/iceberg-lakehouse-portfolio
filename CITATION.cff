@@ -7,6 +7,8 @@ authors:
   - family-names: "Ribeiro"
     given-names: "Diogo"
     email: "diogo_dj@hotmail.com"
+    affiliation: "ESMAD - Polytechnic of Porto"
+    orcid: "https://orcid.org/0009-0001-2022-7072"
 repository-code: "https://github.com/DiogoRibeiro7/iceberg-lakehouse-portfolio"
 url: "https://github.com/DiogoRibeiro7/iceberg-lakehouse-portfolio"
 license: "MIT"
