@@ -61,7 +61,25 @@ def main(argv: list[str] | None = None) -> None:
 
     _assert_services_running(compose_file)
     _run_pipeline(args.config_profile)
-    print("Smoke test passed. Docker services healthy and pipeline run succeeded.")
+    _assert_pipeline_outputs()
+    print("Smoke test passed. Docker services healthy, pipeline run succeeded, outputs valid.")
+
+
+def _assert_pipeline_outputs() -> None:
+    expected_files = {
+        Path("data/bronze/orders_raw.csv"): ["order_id", "customer_id"],
+        Path("data/silver/orders_clean.csv"): ["order_id", "customer_id"],
+        Path("data/gold/daily_revenue.csv"): ["order_date", "order_count"],
+    }
+    for path, required_columns in expected_files.items():
+        if not path.exists():
+            raise RuntimeError(f"Smoke test failed: expected output file missing: {path}")
+        header = path.read_text(encoding="utf-8").splitlines()[0]
+        for col in required_columns:
+            if col not in header:
+                raise RuntimeError(
+                    f"Smoke test failed: {path} missing expected column '{col}'"
+                )
 
 
 if __name__ == "__main__":

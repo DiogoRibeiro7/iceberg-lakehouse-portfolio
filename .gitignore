@@ -22,3 +22,5 @@ data/gold/
 Thumbs.db
 .vscode/
 .idea/
+
+settings.local.json

@@ -17,7 +17,19 @@ Show:
 - deterministic outputs in `data/bronze`, `data/silver`, `data/gold`
 - quality reconciliation result in pipeline output
 
-## 3) Show engineering guardrails (2-3 min)
+Sample output: `docs/sample_output/pipeline_run.txt`
+
+## 3) Walk through data flow (1-2 min)
+
+Show how data transforms across layers:
+- Raw: source-shape CSV with 5 order records
+- Bronze: schema-validated passthrough
+- Silver: typed, normalised, analysis-ready
+- Gold: daily revenue aggregation (5 rows to 3)
+
+Sample data at each layer: `docs/sample_output/data_preview.txt`
+
+## 4) Show engineering guardrails (2-3 min)
 
 ```bash
 make check
@@ -25,17 +37,21 @@ make check
 
 Call out:
 - schema contracts in code
-- quality checks and failure behavior
-- CI + optional integration smoke workflow
+- quality checks with cross-layer reconciliation
+- CI with coverage enforcement (80% minimum, Python 3.10-3.12 matrix)
+- integration smoke workflow with output validation
 
-## 4) Show Iceberg capabilities (3-4 min)
+Sample output: `docs/sample_output/test_suite.txt`
+
+## 5) Show Iceberg capabilities (3-4 min)
 
 - Time travel demo: `sql/time_travel_demo.sql`
 - Schema evolution demo: `sql/schema_evolution_demo.sql`
 - Merge/upsert/delete demo: `sql/merge_upsert_delete_demo.sql`
 - Nessie branching demo: `sql/nessie_branching_demo.sql`
+- Maintenance demo: `sql/maintenance_demo.sql`
 
-## 5) Explain cloud path (1-2 min)
+## 6) Explain cloud path (1-2 min)
 
 - Use `docs/aws_mapping.md` to map local components to S3, Glue, Athena, and EMR/Glue ETL.
 - Mention what stays the same (Iceberg semantics) vs what changes (managed services and ops model).
@@ -43,4 +59,4 @@ Call out:
 ## Suggested close
 
 - "This repo focuses on correctness and operability first: deterministic outputs, quality gates, and reproducible demos."
-- "Next technical increment is maintenance workflows (compaction and snapshot expiration)."
+- "Every demo is backed by CI, coverage enforcement, and idempotent outputs you can verify yourself."

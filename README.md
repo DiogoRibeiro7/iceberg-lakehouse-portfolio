@@ -39,7 +39,12 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 │   ├── maintenance_demo.md
 │   ├── nessie_branching_demo.md
 │   ├── phase2_demos.md
-│   └── roadmap.md
+│   ├── roadmap.md
+│   └── sample_output/
+│       ├── pipeline_run.txt
+│       ├── quality_checks.txt
+│       ├── test_suite.txt
+│       └── data_preview.txt
 ├── sql/
 │   ├── gold_metrics.sql
 │   ├── inspect_tables.sql
@@ -66,9 +71,12 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 │       ├── silver_orders.py
 │       └── gold_orders.py
 └── tests/
+    ├── test_cli.py
     ├── test_config.py
+    ├── test_csv_utils.py
     ├── test_demo_sql.py
     ├── test_jobs.py
+    ├── test_logging_utils.py
     ├── test_quality.py
     └── test_runtime_cli.py
 ```
@@ -173,9 +181,14 @@ Demo details and run order are documented in `docs/phase2_demos.md`.
 ## Current status
 
 The project now includes reproducible bronze/silver/gold jobs with schema validation,
-profile-driven config, structured logging/CLI flags, and CI checks.
+profile-driven config, structured logging/CLI flags, CI checks with coverage enforcement,
+and Iceberg maintenance demos.
 It is still intentionally small and remains a portfolio base, not a full production lakehouse.
 
-## Next recommended steps
+## Sample output
 
-1. Extend portfolio polish with recorded demo artifacts (screenshots/video snippets).
+Pre-captured terminal output for quick review without running the stack:
+- Pipeline run: `docs/sample_output/pipeline_run.txt`
+- Quality checks: `docs/sample_output/quality_checks.txt`
+- Test suite: `docs/sample_output/test_suite.txt`
+- Data preview (all layers): `docs/sample_output/data_preview.txt`

@@ -1,0 +1,9 @@
+$ make run-pipeline
+python -m iceberg_portfolio.jobs.run_pipeline
+
+2026-03-12 09:14:07,560 INFO [__main__] Starting pipeline run.
+2026-03-12 09:14:07,562 INFO [iceberg_portfolio.jobs.bronze_orders] Bronze table written: table=bronze.orders_raw path=data/bronze/orders_raw.csv rows=5
+2026-03-12 09:14:07,563 INFO [iceberg_portfolio.jobs.silver_orders] Silver table written: table=silver.orders_clean path=data/silver/orders_clean.csv rows=5
+2026-03-12 09:14:07,564 INFO [iceberg_portfolio.jobs.gold_orders] Gold table written: table=gold.daily_revenue path=data/gold/daily_revenue.csv rows=3
+2026-03-12 09:14:07,595 INFO [__main__] Pipeline run complete.
+Pipeline complete. bronze_rows=5 silver_rows=5 gold_rows=3 reconciled_total=189.48
