@@ -15,6 +15,6 @@ RUN set -eux; \
     curl -fSL "${MAVEN_REPO}/org/apache/flink/flink-sql-connector-kafka/${FLINK_KAFKA_CONNECTOR_VERSION}/flink-sql-connector-kafka-${FLINK_KAFKA_CONNECTOR_VERSION}.jar" \
       -o "/opt/flink/lib/flink-sql-connector-kafka-${FLINK_KAFKA_CONNECTOR_VERSION}.jar"
 
-COPY conf/sql-client-defaults.yaml /opt/flink/conf/sql-client-defaults.yaml
+COPY docker/flink/sql-client/conf/sql-client-defaults.yaml /opt/flink/conf/sql-client-defaults.yaml
 
 ENV ENABLE_BUILT_IN_PLUGINS=flink-s3-fs-hadoop-1.19.2.jar
