@@ -1,0 +1,45 @@
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "README.md"
+          - "docs/**"
+          - "**/*.md"
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/workflows/**"
+          - ".pre-commit-config.yaml"
+          - "Makefile"
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "pyproject.toml"
+          - "requirements*.txt"
+          - ".github/dependabot.yml"
+
+tests:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "tests/**"
+          - "scripts/smoke_test.py"
+
+pipeline:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "src/iceberg_portfolio/jobs/**"
+          - "src/iceberg_portfolio/quality.py"
+          - "src/iceberg_portfolio/csv_utils.py"
+          - "data/**"
+
+sql:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "sql/**"
+
+config:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "config/**"
+          - "docker/**"
