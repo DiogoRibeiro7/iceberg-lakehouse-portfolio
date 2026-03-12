@@ -12,7 +12,7 @@ registered in the Nessie catalog.
 ## Prerequisites
 
 - Docker stack running from `docker/docker-compose.yml`
-- Flink SQL client with Iceberg + Nessie runtime dependencies available
+- Flink SQL client image in this repo (preloads Iceberg/Nessie runtime jars)
 
 ## Demo SQL
 
@@ -28,10 +28,21 @@ The script includes:
 
 1. Start stack:
    - `docker compose -f docker/docker-compose.yml up -d`
-2. Open Flink SQL client connected to JobManager.
-3. Execute the SQL script sections in order.
+2. Start Flink SQL client:
+   - `docker compose -f docker/docker-compose.yml run --rm flink-sql-client`
+3. Execute the SQL script sections from `sql/flink_iceberg_streaming_demo.sql` in order.
 4. Verify output table:
    - `SELECT * FROM gold.orders_revenue_1m LIMIT 20;`
+
+## Runtime jars bundled in SQL client image
+
+The SQL client image preloads:
+- `iceberg-flink-runtime-1.19-1.6.1.jar`
+- `iceberg-nessie-1.6.1.jar`
+- `iceberg-aws-bundle-1.6.1.jar`
+
+S3 plugin is enabled via:
+- `ENABLE_BUILT_IN_PLUGINS=flink-s3-fs-hadoop-1.19.2.jar`
 
 ## What to explain in interviews
 

@@ -1,0 +1,9 @@
+execution:
+  planner: blink
+  type: streaming
+  result-mode: table
+
+configuration:
+  execution.checkpointing.interval: 30 s
+  execution.checkpointing.mode: EXACTLY_ONCE
+  parallelism.default: 1

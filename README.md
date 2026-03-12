@@ -130,6 +130,12 @@ pip install -e .[dev]
 docker compose -f docker/docker-compose.yml up -d
 ```
 
+Optional: open the preconfigured Flink SQL client (Iceberg/Nessie jars included):
+
+```bash
+docker compose -f docker/docker-compose.yml run --rm flink-sql-client
+```
+
 ### 3. Run the medallion pipeline
 
 ```bash

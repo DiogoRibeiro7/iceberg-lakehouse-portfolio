@@ -57,3 +57,20 @@ services:
       JOB_MANAGER_RPC_ADDRESS: flink-jobmanager
       AWS_ACCESS_KEY_ID: admin
       AWS_SECRET_ACCESS_KEY: password123
+
+  flink-sql-client:
+    build:
+      context: .
+      dockerfile: docker/flink/sql-client/Dockerfile
+    container_name: iceberg-flink-sql-client
+    depends_on:
+      - flink-jobmanager
+      - flink-taskmanager
+      - minio
+      - nessie
+    environment:
+      AWS_ACCESS_KEY_ID: admin
+      AWS_SECRET_ACCESS_KEY: password123
+    entrypoint: ["/opt/flink/bin/sql-client.sh"]
+    stdin_open: true
+    tty: true
