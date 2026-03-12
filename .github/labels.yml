@@ -1,0 +1,27 @@
+- name: bug
+  color: d73a4a
+  description: Something is not working
+- name: documentation
+  color: 0075ca
+  description: Documentation updates
+- name: enhancement
+  color: a2eeef
+  description: New feature or request
+- name: dependencies
+  color: 0366d6
+  description: Dependency updates
+- name: ci
+  color: 5319e7
+  description: CI and workflow changes
+- name: tests
+  color: 1d76db
+  description: Testing related changes
+- name: pipeline
+  color: 0e8a16
+  description: Bronze, silver, gold pipeline changes
+- name: sql
+  color: fbca04
+  description: SQL demos and query changes
+- name: config
+  color: c2e0c6
+  description: Configuration and profile updates

@@ -7,12 +7,12 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 - Local lakehouse stack with **Spark + Iceberg + MinIO + Nessie**
 - Simple **bronze / silver / gold** medallion pipeline
 - Sample analyst-friendly SQL queries
-- Project structure ready for:
-  - time travel demos
-  - schema evolution demos
-  - merge/upsert workflows
-  - data quality checks
-  - Nessie branching workflows
+- Iceberg demo assets for:
+  - time travel
+  - schema evolution
+  - merge/upsert/delete
+  - Nessie branching
+  - maintenance operations
 
 ## Architecture
 
@@ -20,6 +20,13 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 - **Nessie**: catalog and branching layer
 - **Spark**: processing engine
 - **Iceberg**: table format
+
+## Prerequisites
+
+- Python 3.10+
+- Docker Desktop (or Docker Engine + Compose v2)
+- Git
+- Optional for `make` targets: GNU Make
 
 ## Repository layout
 
@@ -83,11 +90,27 @@ Portfolio repository showcasing practical Apache Iceberg lakehouse engineering s
 
 ## Quick start
 
-### 1. Create the environment
+### 1. Create and activate virtual environment
 
 ```bash
 python -m venv .venv
+```
+
+macOS/Linux:
+
+```bash
 source .venv/bin/activate
+```
+
+Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+Then install dependencies:
+
+```bash
 pip install -e .[dev]
 ```
 
@@ -100,11 +123,16 @@ docker compose -f docker/docker-compose.yml up -d
 ### 3. Run the medallion pipeline
 
 ```bash
+python -m iceberg_portfolio.jobs.run_pipeline
+```
+
+Or run step-by-step:
+
+```bash
 python -m iceberg_portfolio.jobs.bronze_orders
 python -m iceberg_portfolio.jobs.silver_orders
 python -m iceberg_portfolio.jobs.gold_orders
 python -m iceberg_portfolio.jobs.quality_checks
-python -m iceberg_portfolio.jobs.run_pipeline
 ```
 
 Pipeline outputs are written as deterministic CSV tables:
@@ -117,6 +145,18 @@ Quality checks fail fast on broken schemas, invalid values, or reconciliation mi
 Jobs support runtime flags:
 - `--config-profile <path>` to load KEY=VALUE settings files
 - `--log-level DEBUG|INFO|WARNING|ERROR`
+
+Run with profile explicitly:
+
+```bash
+python -m iceberg_portfolio.jobs.run_pipeline --config-profile config/profiles/local.env
+```
+
+## What runs where
+
+- Python jobs in `src/iceberg_portfolio/jobs` generate deterministic local CSV outputs for reproducible portfolio execution.
+- Spark/Iceberg/Nessie/MinIO services are used for SQL demos and lakehouse architecture walkthroughs under `sql/` and `docs/`.
+- This split keeps the core pipeline fast and deterministic while still demonstrating Iceberg platform concepts.
 
 ## Development workflow
 
@@ -142,6 +182,13 @@ Run local smoke validation (Docker services + pipeline run):
 
 ```bash
 make smoke
+```
+
+If `make` is unavailable on your OS, use direct Python commands:
+
+```bash
+python -m pytest -q
+python scripts/smoke_test.py --config-profile config/profiles/local.env
 ```
 
 Optional integration CI workflow:
@@ -180,9 +227,9 @@ Demo details and run order are documented in `docs/phase2_demos.md`.
 
 ## Current status
 
-The project now includes reproducible bronze/silver/gold jobs with schema validation,
+The project includes reproducible bronze/silver/gold jobs with schema validation,
 profile-driven config, structured logging/CLI flags, CI checks with coverage enforcement,
-and Iceberg maintenance demos.
+and Iceberg/Nessie demo workflows.
 It is still intentionally small and remains a portfolio base, not a full production lakehouse.
 
 ## Sample output
