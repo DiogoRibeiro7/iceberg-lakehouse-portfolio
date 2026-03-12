@@ -32,3 +32,28 @@ services:
     environment:
       AWS_ACCESS_KEY_ID: admin
       AWS_SECRET_ACCESS_KEY: password123
+
+  flink-jobmanager:
+    image: flink:1.19.2-scala_2.12-java11
+    container_name: iceberg-flink-jobmanager
+    depends_on:
+      - minio
+      - nessie
+    ports:
+      - "8081:8081"
+    command: jobmanager
+    environment:
+      JOB_MANAGER_RPC_ADDRESS: flink-jobmanager
+      AWS_ACCESS_KEY_ID: admin
+      AWS_SECRET_ACCESS_KEY: password123
+
+  flink-taskmanager:
+    image: flink:1.19.2-scala_2.12-java11
+    container_name: iceberg-flink-taskmanager
+    depends_on:
+      - flink-jobmanager
+    command: taskmanager
+    environment:
+      JOB_MANAGER_RPC_ADDRESS: flink-jobmanager
+      AWS_ACCESS_KEY_ID: admin
+      AWS_SECRET_ACCESS_KEY: password123
