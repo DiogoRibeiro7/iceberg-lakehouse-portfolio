@@ -1,5 +1,11 @@
 # Iceberg Lakehouse Portfolio
 
+[![CI](https://github.com/DiogoRibeiro7/iceberg-lakehouse-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/DiogoRibeiro7/iceberg-lakehouse-portfolio/actions/workflows/ci.yml)
+[![Integration Smoke](https://github.com/DiogoRibeiro7/iceberg-lakehouse-portfolio/actions/workflows/integration-smoke.yml/badge.svg)](https://github.com/DiogoRibeiro7/iceberg-lakehouse-portfolio/actions/workflows/integration-smoke.yml)
+[![Coverage](https://img.shields.io/badge/coverage-%E2%89%A580%25-brightgreen)](https://github.com/DiogoRibeiro7/iceberg-lakehouse-portfolio/actions/workflows/ci.yml)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C)](https://github.com/DiogoRibeiro7/iceberg-lakehouse-portfolio/security/dependabot)
+[![Zenodo](https://img.shields.io/badge/Zenodo-ready-blue)](https://zenodo.org/)
+
 Portfolio repository showcasing practical Apache Iceberg lakehouse engineering skills with Spark, MinIO, and Nessie.
 
 ## What this repo demonstrates
@@ -224,6 +230,7 @@ Demo details and run order are documented in `docs/phase2_demos.md`.
 - Architecture and design rationale: `docs/architecture.md`
 - Interview-friendly runbook: `docs/demo_walkthrough.md`
 - AWS service mapping: `docs/aws_mapping.md`
+- Community and contribution docs: `CONTRIBUTING.md`, `SUPPORT.md`, `CODE_OF_CONDUCT.md`
 
 ## Current status
 
