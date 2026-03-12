@@ -1,0 +1,29 @@
+{
+  "title": "Iceberg Lakehouse Portfolio",
+  "description": "Portfolio repository showcasing Apache Iceberg lakehouse engineering skills with Spark, MinIO, and Nessie.",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Ribeiro, Diogo",
+      "orcid": "",
+      "affiliation": ""
+    }
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "keywords": [
+    "apache-iceberg",
+    "spark",
+    "nessie",
+    "minio",
+    "data-engineering",
+    "lakehouse"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/DiogoRibeiro7/iceberg-lakehouse-portfolio",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    }
+  ]
+}

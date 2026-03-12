@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this project, please cite it using the metadata below."
+title: "Iceberg Lakehouse Portfolio"
+type: software
+abstract: "Portfolio repository showcasing Apache Iceberg lakehouse engineering skills."
+authors:
+  - family-names: "Ribeiro"
+    given-names: "Diogo"
+    email: "diogo_dj@hotmail.com"
+repository-code: "https://github.com/DiogoRibeiro7/iceberg-lakehouse-portfolio"
+url: "https://github.com/DiogoRibeiro7/iceberg-lakehouse-portfolio"
+license: "MIT"
+version: "0.1.0"
+date-released: "2026-03-12"
