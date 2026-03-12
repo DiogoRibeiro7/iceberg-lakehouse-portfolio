@@ -30,6 +30,7 @@ The script includes:
    - `docker compose -f docker/docker-compose.yml up -d`
 2. Start Flink SQL client:
    - `docker compose -f docker/docker-compose.yml run --rm flink-sql-client`
+   - or shortcut: `python scripts/run_flink_sql_client.py`
 3. Execute the SQL script sections from `sql/flink_iceberg_streaming_demo.sql` in order.
 4. Verify output table:
    - `SELECT * FROM gold.orders_revenue_1m LIMIT 20;`
