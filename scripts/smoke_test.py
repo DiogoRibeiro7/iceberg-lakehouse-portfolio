@@ -69,7 +69,7 @@ def _assert_pipeline_outputs() -> None:
     expected_files = {
         Path("data/bronze/orders_raw.csv"): ["order_id", "customer_id"],
         Path("data/silver/orders_clean.csv"): ["order_id", "customer_id"],
-        Path("data/gold/daily_revenue.csv"): ["order_date", "order_count"],
+        Path("data/gold/daily_revenue.csv"): ["order_date", "revenue"],
     }
     for path, required_columns in expected_files.items():
         if not path.exists():
@@ -77,9 +77,7 @@ def _assert_pipeline_outputs() -> None:
         header = path.read_text(encoding="utf-8").splitlines()[0]
         for col in required_columns:
             if col not in header:
-                raise RuntimeError(
-                    f"Smoke test failed: {path} missing expected column '{col}'"
-                )
+                raise RuntimeError(f"Smoke test failed: {path} missing expected column '{col}'")
 
 
 if __name__ == "__main__":

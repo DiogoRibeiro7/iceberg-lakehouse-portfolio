@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
 
 import pytest
 
@@ -42,9 +43,7 @@ def test_config_from_args_returns_config_with_defaults() -> None:
     assert cfg.catalog_name == "local"
 
 
-def test_config_from_args_loads_profile(tmp_path: "Path") -> None:
-    from pathlib import Path
-
+def test_config_from_args_loads_profile(tmp_path: Path) -> None:
     profile = tmp_path / "test.env"
     profile.write_text("CATALOG_NAME=test_catalog\n", encoding="utf-8")
 
